@@ -36,6 +36,9 @@
                   <li class="nav-item">
                     <a class="nav-link active" style="color: grey;" aria-current="page" href="{{ route('pengguna.akun') }}">Kelola Akun</a>
                   </li>
+                  @if (Auth::check())
+                      <div class="nav-item"><a href="{{ route('logout') }}" class="nav-link">Logout</a></div>
+                  @endif
                 </ul>
               </div>
             </div>
