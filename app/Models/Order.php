@@ -11,7 +11,7 @@ class Order extends Model
 
     protected $fillable =[
         'user_id',
-        'medicine',
+        'medicines',
         'name_customer',
         'total_price',
     ];
@@ -19,4 +19,9 @@ class Order extends Model
     protected $casts = [
         'medicines' => 'array',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
 }

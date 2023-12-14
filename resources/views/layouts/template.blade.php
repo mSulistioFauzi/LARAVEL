@@ -10,39 +10,47 @@
     <body>
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container">
-              <a class="navbar-brand" href="#">Apotek App</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Obat
-                    </a>
-                    <ul class="dropdown-menu">
+          <div class="container">
+            <a class="navbar-brand" href="/view">Apotek App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/home">Dashboard</a>
+                </li>
+                @if (Auth::check())
+                  @if (Auth::user()->role == "admin")
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Obat
+                      </a>
+                      <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="{{ route('medicine.home') }}">Data Obat</a></li>
                       <li><a class="dropdown-item" href="{{ route('medicine.create') }}">Tambah</a></li>
-                      <li><a class="dropdown-item" href="{{ route('medicine.stock') }}">Stok</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" style="//color: grey;" aria-current="page" href="#">Pembelian</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" style="color: grey;" aria-current="page" href="{{ route('pengguna.akun') }}">Kelola Akun</a>
-                  </li>
-                  @if (Auth::check())
-                      <div class="nav-item"><a href="{{ route('logout') }}" class="nav-link">Logout</a></div>
-                  @endif
-                </ul>
-              </div>
+                      <li><a class="dropdown-item" href="{{ route('medicine.stock') }}">Stock</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-items">
+                      <a class="nav-link" aria-current="page" href="{{ route('order.data') }}">Pembelian</a>
+                    </li>
+                    <li class="nav-items">
+                      <a class="nav-link" aria-current="page" href="{{ route('pengguna.akun') }}">Kelola Akun</a>
+                    </li>
+                  @else
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="{{ route('kasir.order.index') }}">Pembelian</a>
+                    </li>
+                @endif
+              <li class="nav-item">
+                <a href="{{ route('logout') }}" class="nav-link">Logout</a>
+              </li>
+              @endif
+              </ul>
             </div>
-        </nav>
+          </div>
+      </nav>
 
         <div class="container mt-5">
             @yield('content')
